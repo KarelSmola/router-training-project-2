@@ -1,8 +1,14 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, json } from "react-router-dom";
 import EventsList from "../components/EventsList";
 
 function EventsPage() {
-  const events = useLoaderData();
+  const data = useLoaderData();
+
+  // if (data.isError) {
+  // return <p>{data.message}</p>;
+  // }
+
+  const events = data.events;
 
   return (
     <>
@@ -16,9 +22,15 @@ export default EventsPage;
 export const loader = async () => {
   const response = await fetch("http://localhost:8080/events");
   if (!response.ok) {
-    // ..
+    // return { isError: true, message: "Data does not fetched." };
+    // throw new Response(
+    //     JSON.stringify({ message: "Dattta does not fetched." }),
+    //     {
+    //       status: 500,
+    //     }
+    //   );
+    throw json({ message: "Data does not fetched." }, { status: 500 });
   } else {
-    const resData = await response.json();
-    return resData.events;
+    return response;
   }
 };

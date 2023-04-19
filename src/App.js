@@ -23,6 +23,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./pages/Root";
+import Error from "./pages/Error";
 import HomePage from "./pages/HomePage";
 import EventsRoot from "./pages/EventsRoot";
 import EventsPage, { loader as eventsLoader } from "./pages/EventsPage";
@@ -35,7 +36,7 @@ const App = () => {
     {
       path: "/",
       element: <Root />,
-      errorElement: "Wrong",
+      errorElement: <Error />,
       children: [
         { index: true, element: <HomePage /> },
         {
