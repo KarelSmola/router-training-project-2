@@ -24,6 +24,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./pages/Root";
 import HomePage from "./pages/HomePage";
+import EventsRoot from "./pages/EventsRoot";
 import EventsPage from "./pages/EventsPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import NewEventPage from "./pages/NewEventPage";
@@ -34,12 +35,31 @@ const App = () => {
     {
       path: "/",
       element: <Root />,
+      errorElement: "Wrong",
       children: [
-        { path: "/", element: <HomePage /> },
-        { path: "/events", element: <EventsPage /> },
-        { path: "/events/:id", element: <EventDetailPage /> },
-        { path: "/events/new", element: <NewEventPage /> },
-        { path: "/events/:id/edit", element: <EditEventPage /> },
+        { index: true, element: <HomePage /> },
+        {
+          path: "events",
+          element: <EventsRoot />,
+          children: [
+            {
+              index: true,
+              element: <EventsPage />,
+              loader: async () => {
+                const response = await fetch("http://localhost:8080/events");
+
+                if (!response.ok) {
+                } else {
+                  const resData = await response.json();
+                  return resData.events;
+                }
+              },
+            },
+            { path: ":id", element: <EventDetailPage /> },
+            { path: "new", element: <NewEventPage /> },
+            { path: ":id/edit", element: <EditEventPage /> },
+          ],
+        },
       ],
     },
   ]);
