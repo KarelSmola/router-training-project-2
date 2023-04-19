@@ -18,5 +18,6 @@
 
 .list a:hover,
 .list a.active {
+  cursor: pointer;
   color: var(--color-primary-800);
 }
