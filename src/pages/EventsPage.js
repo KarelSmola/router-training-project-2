@@ -8,11 +8,9 @@ function EventsPage() {
   // return <p>{data.message}</p>;
   // }
 
-  const events = data.events;
-
   return (
     <>
-      <EventsList events={events} />
+      <EventsList events={data.events} />
     </>
   );
 }
