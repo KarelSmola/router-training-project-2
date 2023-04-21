@@ -7,7 +7,7 @@ import EventsPage, { loader as eventsLoader } from "./pages/EventsPage";
 import EventDetailPage, {
   loader as eventDetailLoader,
 } from "./pages/EventDetailPage";
-import NewEventPage from "./pages/NewEventPage";
+import NewEventPage, { action as newEvent } from "./pages/NewEventPage";
 import EditEventPage from "./pages/EditEventPage";
 import Error from "./pages/Error";
 // Challenge / Exercise
@@ -61,7 +61,7 @@ const App = () => {
                 { path: "edit", element: <EditEventPage /> },
               ],
             },
-            { path: "new", element: <NewEventPage /> },
+            { path: "new", element: <NewEventPage />, action: newEvent },
           ],
         },
       ],
