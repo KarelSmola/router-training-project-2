@@ -6,6 +6,7 @@ import EventsRoot from "./pages/EventsRoot";
 import EventsPage, { loader as eventsLoader } from "./pages/EventsPage";
 import EventDetailPage, {
   loader as eventDetailLoader,
+  action as deleteEvent,
 } from "./pages/EventDetailPage";
 import NewEventPage, { action as newEvent } from "./pages/NewEventPage";
 import EditEventPage from "./pages/EditEventPage";
@@ -57,6 +58,7 @@ const App = () => {
                 {
                   index: true,
                   element: <EventDetailPage />,
+                  action: deleteEvent,
                 },
                 { path: "edit", element: <EditEventPage /> },
               ],
